@@ -1,5 +1,4 @@
 
-
 public class aims {
     public static void main(String[] args) {
         Cart newOrd = new Cart();
@@ -7,7 +6,8 @@ public class aims {
         newOrd.addDigitalVideoDisc(disc1);
         DigitalVideoDisc disc2 = new DigitalVideoDisc("Star Wars","Science fiction","George Lucas",87,24.95f);
         newOrd.addDigitalVideoDisc(disc2);
-        DigitalVideoDisc disc3 = new DigitalVideoDisc("Aladin","Animation",18.99f);
+        DigitalVideoDisc disc3 = new DigitalVideoDisc("Aladin");
+        disc3 = new DigitalVideoDisc("Aladin","Animation",18.99f);
         newOrd.addDigitalVideoDisc(disc3);
         System.out.println("Total cost is: "+ newOrd.totalCost());
         newOrd.display();
