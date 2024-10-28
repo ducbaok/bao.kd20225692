@@ -1,0 +1,47 @@
+1. What happens if users choose “Cancel”?
+=> System output chosen option is "No" because program only accept "Yes" as YesOption, No and Cancel equivalent to "No"
+2. 
+=> Use the JOptionPane.showOptionDialog method, which allows to specify button texts. 
+And handling reponse by value given in default.
+///////////////////
+Sample Code:
+
+    import javax.swing.JOptionPane;
+
+    public class CustomOptionsExample {
+        public static void main(String[] args) {
+            
+            Object[] options1 = {"Yes", "No"}; // default 
+            Object[] options2 = {"I do", "I don't"}; // edited
+
+            int response1 = JOptionPane.showOptionDialog(null,
+                    "Do you want to proceed?",
+                    "Confirmation",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options1,
+                    options1[0]);
+
+            if (response1 == 0) {
+                JOptionPane.showMessageDialog(null, "You've chosen: Yes");
+            } else {
+                JOptionPane.showMessageDialog(null, "You've chosen: No");
+            }
+
+            int response2 = JOptionPane.showOptionDialog(null,
+                    "Are you ready?",
+                    "Confirmation",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options2,
+                    options2[0]);
+
+            if (response2 == 0) {
+                JOptionPane.showMessageDialog(null, "You've chosen: I do");
+            } else {
+                JOptionPane.showMessageDialog(null, "You've chosen: I don't");
+            }
+        }
+    }
