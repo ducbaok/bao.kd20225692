@@ -86,4 +86,42 @@ public class Cart {
             System.out.printf("%-30s| %-20s| %-20s| %-5d | %-5g$\n", disc.getTitle(), disc.getCategory(), disc.getDirector(), disc.getLength(), disc.getCost());
         }
     }
+
+    public void printCart(){
+        System.out.println("***********************CART************************\r\n" + "Ordered Items:\r\n");
+        for(DigitalVideoDisc disc : dvd)
+        {
+            System.out.println(disc.toString());
+        }
+        System.out.println("Total cost: " + totalCost());
+        System.out.println("***************************************************");
+    }
+
+    public void search(int id)
+    {
+        for(DigitalVideoDisc disc : dvd)
+        {
+            if(disc.getId() == id)
+            {
+                System.out.println(disc.toString());
+                return;
+            }
+        }
+        System.out.println("Error. The disc is not found.");
+    }
+
+    public void search(String query)
+    {
+        int count = 0;
+        for(DigitalVideoDisc disc : dvd)
+        {
+            if(disc.isMatch(query))
+            {
+                count++;
+                System.out.println(disc.toString());
+            }
+        }
+        if(count == 0) System.out.println("Error. The disc is not found.");
+    }
+
 }
