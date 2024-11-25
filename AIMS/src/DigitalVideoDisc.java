@@ -39,6 +39,10 @@ public class DigitalVideoDisc {
     public void setCost(float cost) {
         this.cost = cost;
     }
+    public String toString() {
+        return "DVD - " + title + " - " + category + " - " + director + " - " + length + " - " + cost + "$";
+    }
+
     public float getCost() {
         return cost;
     }
@@ -70,5 +74,17 @@ public class DigitalVideoDisc {
         this.cost=cost;
         this.length=length;
         this.category=category;
+    }
+
+    public boolean isMatch(String query)
+    {
+        String[] queryWords = query.toLowerCase().split("\\s+");  
+        for (String word : queryWords) {
+            if (title.toLowerCase().contains(word)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
