@@ -7,7 +7,7 @@ public class DigitalVideoDisc {
     private int length;
     private float cost;
     private static int nbDigitalVideoDiscs = 0;
-
+    public boolean stateofdel = false;
     public int getId() {
         return id;
     }
@@ -85,6 +85,12 @@ public class DigitalVideoDisc {
             }
         }
 
+        return false;
+    }
+
+    public boolean isExist(String title, String category, String director, int length, float cost)
+    {
+        if(this.title == title && this.category == category && this.director == director && this.length == length && this.cost == cost) return true;
         return false;
     }
 }
