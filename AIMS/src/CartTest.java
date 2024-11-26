@@ -28,15 +28,7 @@ public class CartTest {
             cart.printCart();
 
 
-            try (Scanner sc = new Scanner(System.in)) {
-            System.out.println("Search by title");
-            String searchedTitle = sc.nextLine();
-            cart.search(searchedTitle);
-
-            System.out.println("Search by id");
-            int searchedId = sc.nextInt();
-            cart.search(searchedId);
-        }
+            
         
     }
 
