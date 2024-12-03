@@ -1,11 +1,11 @@
 package hust.soict.dsai.test.store;
 
-import hust.soict.dsai.aims.disc.DigitalVideoDisc;
-import hust.soict.dsai.aims.store.store;
+import hust.soict.dsai.aims.media.DigitalVideoDisc;
+import hust.soict.dsai.aims.store.Store;
 
 public class StoreTest {
     public static void main(String[] args) {
-        store dvdstore = new store();
+        Store dvdstore = new Store();
         DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King",
                                                        "Animation",
                                                        "Roger Allers",
@@ -21,20 +21,20 @@ public class StoreTest {
                                                        "Animation",
                                                        18.99f);
 
-        dvdstore.addDigitalVideoDisc(dvd1);
-        dvdstore.addDigitalVideoDisc(dvd2);
+        dvdstore.add(dvd1);
+        dvdstore.add(dvd2);
 
         
 
         dvdstore.displayStore();
         System.out.println();
 
-        dvdstore.removeDigitalVideoDisc(dvd3); //Expected output: Chưa thêm đĩa 3 nên không tìm thấy
+        dvdstore.remove(dvd3.getTitle()); //Expected output: Chưa thêm đĩa 3 nên không tìm thấy
 
-        dvdstore.addDigitalVideoDisc(dvd3); //Thêm
+        dvdstore.add(dvd3); //Thêm
 
-        dvdstore.removeDigitalVideoDisc(dvd3); //Expected output: Xóa thành công
-        dvdstore.removeDigitalVideoDisc(dvd3); //Expected output: Đã xóa nên không xóa được nữa
+        dvdstore.remove(dvd3.getTitle()); //Expected output: Xóa thành công
+        dvdstore.remove(dvd3.getTitle()); //Expected output: Đã xóa nên không xóa được nữa
 
         dvdstore.displayStore();
     }
