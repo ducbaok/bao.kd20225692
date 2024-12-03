@@ -1,22 +1,45 @@
-Question: Is JAVA a Pass by Value or a Pass by Reference programming language? 
+Question 1: Lớp nào nên implement interface Comparable?
+Media
+Question 2: Làm thế nào để triển khai phương thức compareTo() để phản ánh thứ tự mà chúng ta muốn?
+Trả lời: Phương thức compareTo() trong lớp Media nên so sánh trước tiên theo tiêu đề (từ điển, theo thứ tự chữ cái). 
+Nếu các tiêu đề giống nhau, tiếp theo chúng ta sẽ so sánh chi phí (theo thứ tự giảm dần). 
+Cách làm này đảm bảo thứ tự chính là theo tiêu đề, và nếu các tiêu đề giống nhau, chi phí sẽ được dùng để phân biệt 
+(với chi phí cao hơn sẽ xuất hiện trước).
 
-- After the call of swap(jungleDVD, cinderellaDVD) why does the title of these two objects still remain?
-=>  Trong phương thức swap(jungleDVD, cinderellaDVD), Java sử dụng pass by value khi truyền tham số. 
-    Điều này có nghĩa là các tham số o1 và o2 nhận các bản sao của jungleDVD và cinderellaDVD, 
-    chứ không phải là các đối tượng gốc. 
-    Khi bạn đổi giá trị giữa o1 và o2 trong phương thức swap, điều này chỉ thay đổi các bản sao của chúng, 
-    không thay đổi các đối tượng gốc ngoài phương thức.
-    Sau khi phương thức swap được gọi, các đối tượng jungleDVD và cinderellaDVD 
-    ngoài phương thức vẫn giữ nguyên tên ban đầu của chúng, 
-    vì tham số o1 và o2 chỉ là bản sao (reference) của các đối tượng này.
+Question 3: Chúng ta có thể có nhiều quy tắc sắp xếp khác nhau nếu chúng ta sử dụng cách tiếp cận Comparable không?
+Trả lời: Không, bạn không thể có nhiều quy tắc sắp xếp trực tiếp với interface Comparable vì phương thức compareTo() 
+chỉ định một thứ tự "tự nhiên" duy nhất cho các đối tượng của lớp đó. Đây là quy tắc so sánh duy nhất được áp dụng 
+cho việc sắp xếp các đối tượng cùng loại. Nếu bạn cần nhiều quy tắc sắp xếp khác nhau (ví dụ: theo tiêu đề rồi 
+chi phí hoặc theo chi phí rồi tiêu đề), bạn sẽ cần sử dụng nhiều comparator khác nhau.
 
-- After the call of changeTitle(jungleDVD, cinderellaDVD.getTitle()) why is the title of the JungleDVD changed?
-=> Trong phương thức changeTitle(jungleDVD, cinderellaDVD.getTitle()), 
-    bạn truyền vào phương thức một tham số title là giá trị tên của cinderellaDVD. 
-    Khi gọi dvd.setTitle(title), bạn thay đổi tiêu đề của jungleDVD vì dvd là tham chiếu tới đối tượng jungleDVD.
+Question 4: Giả sử các DVD có quy tắc sắp xếp khác biệt so với các loại phương tiện khác, tức là theo tiêu đề, 
+sau đó theo độ dài giảm dần, rồi đến chi phí. Làm thế nào để bạn thay đổi mã của mình để cho phép điều này?
 
-==> Java sử dụng cơ chế truyền tham trị. Khi bạn truyền một đối tượng vào phương thức, 
-    thực chất bạn truyền một bản sao của tham chiếu đến đối tượng đó. 
-    Nếu bạn thay đổi thuộc tính của đối tượng thông qua tham chiếu này, 
-    sự thay đổi sẽ ảnh hưởng đến đối tượng gốc. Tuy nhiên, nếu bạn thay đổi tham chiếu (ví dụ gán tham chiếu mới), 
-    thay đổi đó sẽ không ảnh hưởng đến tham chiếu gốc ngoài phương thức.
+Để hỗ trợ quy tắc sắp xếp khác biệt cho DVD (ví dụ, trước tiên theo tiêu đề, sau đó theo độ dài giảm dần, và cuối cùng là chi phí giảm dần), 
+chúng ta có thể ghi đè phương thức compareTo() trong lớp DigitalVideoDisc (là lớp con của Media). 
+Cách làm này giúp chúng ta áp dụng logic sắp xếp cụ thể cho DVD trong khi vẫn giữ nguyên thứ tự sắp xếp mặc định cho các phương tiện khác.
+
+@Override
+public int compareTo(Media other) {
+    if (other instanceof DigitalVideoDisc) {
+        DigitalVideoDisc dvd = (DigitalVideoDisc) other;
+        
+        // So sánh theo tiêu đề theo thứ tự chữ cái
+        int titleComparison = this.getTitle().compareTo(dvd.getTitle());
+        if (titleComparison != 0) {
+            return titleComparison;  // Nếu tiêu đề khác nhau, trả về kết quả so sánh
+        }
+
+        // Nếu tiêu đề giống nhau, so sánh theo độ dài giảm dần
+        int lengthComparison = Integer.compare(dvd.getLength(), this.getLength());
+        if (lengthComparison != 0) {
+            return lengthComparison;  // Nếu độ dài khác nhau, trả về kết quả so sánh
+        }
+
+        // Nếu tiêu đề và độ dài đều giống nhau, so sánh theo chi phí giảm dần
+        return Float.compare(dvd.getCost(), this.getCost());  // Đảo ngược để có thứ tự giảm dần
+    }
+
+    // Nếu đối tượng khác không phải là DVD, sử dụng phương thức so sánh mặc định của lớp cơ sở
+    return super.compareTo(other);
+}
