@@ -11,7 +11,7 @@ public class PaintController{
     private boolean UsingPen;
     @FXML
     private VBox drawingAreaPane;
-
+//a
     @FXML
     void clearButtonPressed(ActionEvent event) {
         drawingAreaPane.getChildren().clear();
