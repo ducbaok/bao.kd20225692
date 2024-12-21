@@ -1,0 +1,190 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "StoreScreen",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.aims.screen.StoreScreen",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "GUIProject",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.javafx.Painter",
+            "vmArgs": "--module-path lib --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "aims",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.aims.aims",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "ConcatenationInLoops",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.garbage.ConcatenationInLoops",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "GarbageCreator",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.garbage.GarbageCreator",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "NoGarbage",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.garbage.NoGarbage",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "Painter",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.javafx.Painter",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "SortingSumAverage",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.lab01.ArrayManipulation.SortingSumAverage",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "DayCal",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.lab01.DaysDisplay.DayCal",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "EquationSolver",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.lab01.EquationSolver",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "FirstDialog",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.lab01.FirstDialog",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "HelloNameDialog",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.lab01.HelloNameDialog",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "HelloWorld",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.lab01.HelloWorld",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "ChoosingOption",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.lab01.JavaBasics.ChoosingOption",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "InputFromKeyboard",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.lab01.JavaBasics.InputFromKeyboard",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "SumMatrix",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.lab01.MatrixSum.SumMatrix",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "NumberManipulation",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.lab01.NumberManipulation",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "ShowTwoNumbers",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.lab01.ShowTwoNumbers",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "StarBuild",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.lab01.TriangleBuilder.StarBuild",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "aims(1)",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.lab02.AIMS.src.aims",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "AWTAccumulator",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.swing.AWTAccumulator",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "NumberGrid",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.swing.NumberGrid",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "SwingAccumulator",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.swing.SwingAccumulator",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "CartTest",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.test.cart.CartTest",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "TestPassingParameter",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.test.disc.TestPassingParameter",
+            "projectName": "bao.kd20225692_ccb988bd"
+        },
+        {
+            "type": "java",
+            "name": "StoreTest",
+            "request": "launch",
+            "mainClass": "hust.soict.dsai.test.store.StoreTest",
+            "projectName": "bao.kd20225692_ccb988bd"
+        }
+    ]
+}

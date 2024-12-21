@@ -2,6 +2,10 @@
     "java.project.sourcePaths": [
         "AIMS/src",
         "OtherProjects",
+        "GUIProject/src",
         "[src]"
+    ],
+    "java.project.referencedLibraries": [
+        "lib/*.jar"
     ]
 }

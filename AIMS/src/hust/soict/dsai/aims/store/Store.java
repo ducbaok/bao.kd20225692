@@ -7,6 +7,10 @@ public class Store {
 
     public static final int MAX_AMOUNT = 100;
     private ArrayList<Media> itemsInStore = new ArrayList<Media>();
+
+    public ArrayList<Media> getItemsInStore(){
+        return itemsInStore;
+    }
     private int mediaCount = 0;
     public void add(Media media){
         if(mediaCount < 100)
@@ -65,5 +69,10 @@ public class Store {
             }
         }
         return queryResult;
+    }
+
+    public int size()
+    {
+        return itemsInStore.size();
     }
 }
