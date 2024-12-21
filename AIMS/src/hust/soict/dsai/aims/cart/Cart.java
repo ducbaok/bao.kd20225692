@@ -26,12 +26,20 @@ public class Cart {
     }
 
     // Modified search method to return a List<Media>
-    public List<Media> search(String query) {
+    public List<Media> searchbyQuery(String query) {
         List<Media> matchedItems = new ArrayList<>();
         for (Media media : itemOrdered) {
             if (media.isMatch(query)) {
                 matchedItems.add(media);
             }
+        }
+        return matchedItems;
+    }
+
+    public List<Media> searchbyID(String query) {
+        List<Media> matchedItems = new ArrayList<>();
+        for (Media media : itemOrdered) {
+            if(media.getId() == Integer.parseInt(query)) matchedItems.add(media);
         }
         return matchedItems;
     }
@@ -57,5 +65,23 @@ public class Cart {
         itemOrdered.clear();
         qtyOrdered = 0;
         System.out.println("The cart has been cleared.");
+    }
+
+    public void SortTitleCost()
+    {
+        itemOrdered.sort(Media.COMPARE_BY_TITLE_COST);
+    }
+    
+    public void SortCostTitle()
+    {
+        itemOrdered.sort(Media.COMPARE_BY_COST_TITLE);
+    }
+
+    public void display(){
+        System.out.println("Items in cart:");
+        for(Media media: itemOrdered){
+            System.out.println(media.toString());
+        }
+        System.out.println("Total cost: " + totalCost());
     }
 }

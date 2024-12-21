@@ -125,14 +125,14 @@ public class aims {
                 {
                     case 1:
                         System.out.println("Enter id");
-                        int id = scanner.nextInt();
+                        String id = scanner.nextLine();
                         scanner.nextLine();
-                        cart.search(id);
+                        cart.searchbyID(id);
                         continue;
                     case 2:
                         System.out.println("Enter title");
                         String title = scanner.nextLine();
-                        cart.search(title);
+                        cart.searchbyQuery(title);
                         continue;
                     case 0:
                         System.out.println("Exiting program.");
