@@ -1,15 +1,13 @@
 package hust.soict.dsai.aims.screen;
 
-import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-
 import hust.soict.dsai.aims.store.*;
+import javafx.application.*;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.stage.Stage;
 import hust.soict.dsai.aims.media.*;
 import hust.soict.dsai.aims.cart.*;
@@ -19,84 +17,61 @@ public class StoreScreen extends JFrame {
     private Cart cart = new Cart();
 
     public static void main(String[] args) {
-        init();
-        new StoreScreen(store);
+        initStore();
+        // Launch JavaFX in the proper thread
+        SwingUtilities.invokeLater(() -> new StoreScreen(store));
     }
 
-    public static void init() {
-        DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King",
-                                                       "Animation",
-                                                       "Roger Allers",
-                                                       87,
-                                                       19.95f);
-                                                 
-        DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars",
-                                                       "Science Fiction",
-                                                       "George Lucas",
-                                                       87,
-                                                       24.95f);
-        DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladdin",
-                                                       "Animation",
-                                                       18.99f);
-        DigitalVideoDisc dvd4 = new DigitalVideoDisc("Aladdin",
-                                                       "Animation",
-                                                       19.01f);
-        Book book1 = new Book("Nihongo", "Language", 20);
-        CompactDisc cd1 = new CompactDisc("Big Bang", "Music", "BigBang", 600);
-
-        Book book4 = new Book("The Great Gatsby", "Fiction", 15.99f);
-        Book book2 = new Book("To Kill a Mockingbird", "Classic", 12.99f);
-        Book book3 = new Book("1984", "Dystopian", 18.50f);
-
-        store.add(dvd1);
-        store.add(dvd2);  
-        store.add(dvd3);
-        store.add(dvd4);
-        store.add(book1);
-        store.add(cd1);   
-        store.add(book2);
-        store.add(book3);
-        store.add(book4);
+    public static void initStore() {
+        // Adding sample media items
+        store.add(new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f));
+        store.add(new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 87, 24.95f));
+        store.add(new DigitalVideoDisc("Aladdin", "Animation", 18.99f));
+        store.add(new DigitalVideoDisc("Aladdin", "Animation", 19.01f));
+        store.add(new Book("Nihongo", "Language", 20));
+        store.add(new CompactDisc("Big Bang", "Music", "BigBang", 600));
+        store.add(new Book("The Great Gatsby", "Fiction", 15.99f));
+        store.add(new Book("To Kill a Mockingbird", "Classic", 12.99f));
+        store.add(new Book("1984", "Dystopian", 18.50f));
     }
 
     public StoreScreen(Store store) {
         StoreScreen.store = store;
+        setTitle("Store");
+        setSize(1024, 768);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());
 
-        cp.add(createNorth(), BorderLayout.NORTH);
-        cp.add(createCenter(), BorderLayout.CENTER);
+        cp.add(createNorthPanel(), BorderLayout.NORTH);
+        cp.add(createCenterPanel(), BorderLayout.CENTER);
 
         setVisible(true);
-        setTitle("Store");
-        setSize(1024, 768);
     }
 
-    JPanel createNorth() {
-        JPanel north = new JPanel();
-        north.setLayout(new BoxLayout(north, BoxLayout.Y_AXIS));
-        north.add(createMenuBar());
-        north.add(createHeader());
-        return north;
+    // Create North Panel with Menu Bar and Header
+    JPanel createNorthPanel() {
+        JPanel northPanel = new JPanel();
+        northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
+        northPanel.add(createMenuBar());
+        northPanel.add(createHeader());
+        return northPanel;
     }
 
+    // Create Menu Bar
     JMenuBar createMenuBar() {
         JMenu menu = new JMenu("Options");
-
         JMenu smUpdateStore = new JMenu("Update Store");
-        JMenuItem addBook = new JMenuItem("Add Book");
-        JMenuItem addCD = new JMenuItem("Add CD");
-        JMenuItem addDVD = new JMenuItem("Add DVD");
 
-        // Add event listeners to the menu items
-        addBook.addActionListener(e -> openAddBookScreen());
-        addCD.addActionListener(e -> openAddCDScreen());
-        addDVD.addActionListener(e -> openAddDVDScreen());
+        // Add menu items for adding media
+        JMenuItem addBook = createMenuItem("Add Book", e -> openAddBookScreen());
+        JMenuItem addCD = createMenuItem("Add CD", e -> openAddCDScreen());
+        JMenuItem addDVD = createMenuItem("Add DVD", e -> openAddDVDScreen());
 
         smUpdateStore.add(addBook);
         smUpdateStore.add(addCD);
         smUpdateStore.add(addDVD);
-
         menu.add(smUpdateStore);
         menu.add(new JMenuItem("View store"));
         menu.add(new JMenuItem("View cart"));
@@ -107,6 +82,14 @@ public class StoreScreen extends JFrame {
         return menuBar;
     }
 
+    // Utility to create a JMenuItem with event handler
+    private JMenuItem createMenuItem(String text, ActionListener listener) {
+        JMenuItem item = new JMenuItem(text);
+        item.addActionListener(listener);
+        return item;
+    }
+
+    // Create Header with Title and Cart Button
     JPanel createHeader() {
         JPanel header = new JPanel();
         header.setLayout(new BoxLayout(header, BoxLayout.X_AXIS));
@@ -117,7 +100,7 @@ public class StoreScreen extends JFrame {
 
         JButton cartButton = new JButton("View cart");
         cartButton.setPreferredSize(new Dimension(100, 50));
-        cartButton.setMaximumSize((new Dimension(100, 50)));
+        cartButton.setMaximumSize(new Dimension(100, 50));
 
         header.add(Box.createRigidArea(new Dimension(10, 10)));
         header.add(title);
@@ -128,53 +111,52 @@ public class StoreScreen extends JFrame {
         return header;
     }
 
-    JPanel createCenter() {
-        JPanel center = new JPanel();
-        center.setLayout(new GridLayout(3, 3, 2, 2));
+    // Create Center Panel to display media items
+    JPanel createCenterPanel() {
+        JPanel centerPanel = new JPanel();
+        centerPanel.setLayout(new GridLayout(3, 3, 2, 2));
 
-        ArrayList<Media> mediaInStore = store.getItemsInStore();
-        int size = store.size();
-        for (int i = 0; i < size; i++) {
-            MediaStore cell = new MediaStore(mediaInStore.get(i));
-            center.add(cell);
+        for (Media media : store.getItemsInStore()) {
+            MediaStore mediaCell = new MediaStore(media);
+            centerPanel.add(mediaCell);
         }
-        return center;
+        return centerPanel;
     }
 
+    // Class representing a media item in the store
     public class MediaStore extends JPanel {
         private Media media;
 
         public MediaStore(Media media) {
             this.media = media;
-            this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+            setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-            JLabel title = new JLabel(media.getTitle());
-            title.setFont(new Font(title.getFont().getName(), Font.PLAIN, 20));
-            title.setAlignmentX(CENTER_ALIGNMENT);
+            JLabel titleLabel = new JLabel(media.getTitle());
+            titleLabel.setFont(new Font(titleLabel.getFont().getName(), Font.PLAIN, 20));
+            titleLabel.setAlignmentX(CENTER_ALIGNMENT);
 
-            JLabel cost = new JLabel("" + media.getCost() + " $");
-            cost.setAlignmentX(CENTER_ALIGNMENT);
-
-            JPanel container = new JPanel();
-            container.setLayout(new FlowLayout(FlowLayout.CENTER));
+            JLabel costLabel = new JLabel(String.format("%.2f $", media.getCost()));
+            costLabel.setAlignmentX(CENTER_ALIGNMENT);
 
             JButton addToCartButton = new JButton("Add to cart");
             addToCartButton.addActionListener(e -> cart.add(this.media));
-            container.add(addToCartButton);
+
+            JPanel buttonPanel = new JPanel();
+            buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+            buttonPanel.add(addToCartButton);
 
             if (media instanceof Playable) {
                 JButton playButton = new JButton("Play");
                 playButton.addActionListener(e -> playDialog(this.media));
-                container.add(playButton);
+                buttonPanel.add(playButton);
             }
 
-            this.add(Box.createVerticalGlue());
-            this.add(title);
-            this.add(cost);
-            this.add(Box.createVerticalGlue());
-            this.add(container);
-
-            this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            add(Box.createVerticalGlue());
+            add(titleLabel);
+            add(costLabel);
+            add(Box.createVerticalGlue());
+            add(buttonPanel);
+            setBorder(BorderFactory.createLineBorder(Color.BLACK));
         }
 
         private void playDialog(Media media) {
@@ -194,48 +176,33 @@ public class StoreScreen extends JFrame {
         }
     }
 
-    // Method to open Add Book Screen
+    // Methods for opening screens to add items (Book, CD, DVD)
     private void openAddBookScreen() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hust/soict/dsai/aims/screen/fxml/AddBookScreen.fxml"));
-            loader.setController(new AddBookScreenController(store));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Add Book");
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        openFXMLScreen("/hust/soict/dsai/aims/screen/fxml/AddBookScreen.fxml", new AddBookScreenController(store), "Add Book");
     }
 
-    // Method to open Add CD Screen
     private void openAddCDScreen() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hust/soict/dsai/aims/screen/fxml/AddCDScreen.fxml"));
-            loader.setController(new AddCompactDiscScreenController(store));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Add Compact Disc");
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        openFXMLScreen("/hust/soict/dsai/aims/screen/fxml/AddCDScreen.fxml", new AddCompactDiscScreenController(store), "Add Compact Disc");
     }
 
-    // Method to open Add DVD Screen
     private void openAddDVDScreen() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/hust/soict/dsai/aims/screen/fxml/AddDVDScreen.fxml"));
-            loader.setController(new AddDVDScreenController(store));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Add DVD");
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        openFXMLScreen("/hust/soict/dsai/aims/screen/fxml/AddDVDScreen.fxml", new AddDVDScreenController(store), "Add DVD");
+    }
+
+    private void openFXMLScreen(String fxmlPath, Object controller, String title) {
+        // Ensure JavaFX components are accessed on the JavaFX thread
+        Platform.runLater(() -> {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+                loader.setController(controller);
+                Parent root = loader.load();
+                Stage stage = new Stage();
+                stage.setTitle(title);
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }
